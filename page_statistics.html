@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./web_css.css">
+</head>
+<body>
+    <!--  여기부터 Header입니다! -->
+    <div id="header">
+        <a href="./page_introduce.html" id="header_logo"></a>
+    </div>
+    <div id="sub_header">
+        <a href="./page_introduce.html" class="a_text">페이지 소개</a>
+        <a href="" class="a_text" id="selected">현황 보기</a>
+        <a href="./page_ranking.html" class="a_text">태양광 지역별 순위</a>
+        <a href="https://naver.me/x8lsXYcL" class="a_text" style="padding: 0;" target="_blank">
+            <img src="./image/profile.jpg" alt="" style="height: 30px; width: auto; border-radius: 50%;">
+        </a>
+    </div>
+    <!--  여기까지 Header입니다! -->
+
+    
+    <div id="infoBox">
+        <h3  style="color: rgb(135, 135, 135); margin: 0;" id="title_date">오늘 날짜</h3>
+        <h1 style="color: rgb(42, 42, 42); margin: 0;" id="title_location">당신의 지역</h1>
+        <div id="setting_info">
+            <select name="region" id="select_box" onchange="ChangeRegion()">
+                <option value="" disabled selected hidden>지역 선택하기</option>
+                <script>
+                    const regions = ["강원도", "경기도", "경상남도", "경상북도", "광주시", "대구시", "대전시", "부산시", 
+                    "서울시", "세종시", "울산시", "인천시", "전라남도", "전라북도", "제주도", "충청남도", "충청북도"];
+                    for (let i=0; i<regions.length; i++){
+                        document.getElementById("select_box").innerHTML += `<option value="${regions[i]}">${regions[i]}</option>`;
+                    };
+                </script>
+            </select>
+            <input type="text" id="date_input" placeholder="YYYYMMDD">
+            <button id="setting_fast_input" onclick="fast_input()">빠른 입력</button>
+            <button id="setting_confirm" onclick="ChangeInfo()">확인</button>
+        </div>
+        <div style="display: inline-block;">
+            <div>
+                <p id="resultIn_1"></p>
+                <p id="amgo_text"></p>
+                <div id="Feeling_MWH"> <!--메가와트시 체감 리스트-->
+                    <!-- <div id="Felling_contents">
+                        <p id="resultIn_1">안녕</p>
+                    </div> -->
+                </div>
+                <img src="./image/sleeping.png" alt="" id="character_img" hidden="true">
+                <h2 style="color: rgb(68, 68, 68);" id="There_is_no_data" hidden="true">해당 날짜의 데이터가 없어요!</h2>
+            </div>
+        </div>
+    </div>
+    <div style="height: 45px;"></div>
+
+
+    <script>
+        function fast_input(){
+            //현재 날짜 불러오기
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // padStart는 두 자리 숫자를 만들기 위한 메소드 )
+            const day = String(today.getDate()).padStart(2, '0');        // .padStart(String의 길이, 길이를 맞추기 위해 채울 문자)
+            const now = year+month+day;
+            document.getElementById("date_input").value = now; 
+            document.getElementById("title_date").innerText = `${year}년 ${month}월 ${day}일`;      
+        }
+        
+        function getSolarInfo(){
+            const xhr = new XMLHttpRequest();
+            key = "gYZh35zWbTLzN6GbrKJYcSlwQaSfnHrnisfzNf75asMzx9DaeRv8lTCExmvNrbpl%2Bfa%2FzA3HwLNnHjwTpKZyhw%3D%3D";
+            pageNumber = 1;
+            numOfRows = 17;
+            date = document.getElementById("date_input").value;
+            xhr.open("GET", `https://apis.data.go.kr/B552115/PvAmountByLocHr/getPvAmountByLocHr?serviceKey=${key}&pageNo=${pageNumber}&numOfRows=${numOfRows}&dataType=json&tradeYmd=${date}`)
+            xhr.send();
+            xhr.onreadystatechange = function(){
+                //서버 응답 완료
+                if(xhr.readyState !== XMLHttpRequest.DONE) return;
+                if(xhr.status === 200){
+                    //console.log(xhr.responseText);
+                    let xhrJ = JSON.parse(xhr.responseText);    // JSON(문자열)을 객체로 변환 -> 값에 접근 시 필요
+                    let regionNm = 0;
+                    let selectRegion = document.getElementById("select_box").value;
+                    
+                    if (xhrJ.response.body.items.item[0]==undefined) {             // 데이터가 없으면 데이터가 없어요! 화면 만들기
+                        document.getElementById("There_is_no_data").hidden = false;
+                        document.getElementById("character_img").hidden = false;
+                            document.getElementById("resultIn_1").innerText = "";
+                        document.getElementById("infoBox").style.height = 500+"px";
+                    }else{
+                        for (let i=0; i<regions.length; i++){
+                            if (xhrJ.response.body.items.item[i].regionNm === selectRegion) {
+                                console.log(xhrJ.response.body.items.item[i].regionNm);
+                                document.getElementById("title_location").innerText = selectRegion;
+                                regionNm = i;
+                                break;
+                            }
+                        }
+                        if (xhrJ.response.body.items.item[regionNm].regionNm != selectRegion){
+                            alert("해당 지역의 발전량 정보가 없습니다.");
+                            return;
+                        }else{
+                            document.getElementById("infoBox").style.height = 700+"px";
+    
+                            let amgo = xhrJ.response.body.items.item[regionNm].amgo;
+                            document.getElementById("resultIn_1").innerText = "우리 지역의 하루 발전량은...";
+                            document.getElementById("amgo_text").innerText = `${amgo} MWh`;
+    
+                            createElement(`🍗 전자레인지를 ${Math.round(amgo/0.01)}시간 돌릴 수 있는 전력량이에요.`);
+                            createElement(`💡 LED 전구로 ${Math.round(amgo/0.0876)}시간 동안 불을 켤 수 있는 전력량이에요.`);
+                            
+                            //document.getElementById("inn_content").innerText = xhr.responseText;
+                        }
+                    }
+                } else {
+                    console.log("에러 발생: " + xhr.status);
+                }
+            }
+        }
+        function createElement(content){
+            let newElem = document.createElement("div");
+            newElem.id = "Feeling_MWH";
+            newElem.innerHTML = `<div id="Felling_contents">
+                                    <p>${content}</p>
+                                </div>`;
+            document.getElementById("Feeling_MWH").appendChild(newElem);
+        }
+
+        function ChangeInfo() {
+            const selectBox = document.getElementById("select_box");
+            const selectedValue = selectBox.value;
+
+            // 데이터를 불러오는 중일 때의 화면
+            document.getElementById("There_is_no_data").hidden = true;
+            document.getElementById("character_img").hidden = true;
+
+            document.getElementById("infoBox").style.height = 300+"px";
+
+            document.getElementById("resultIn_1").innerText = "데이터를 불러오는 중이에요...";
+            document.getElementById("amgo_text").innerText = "";
+            document.getElementById("Feeling_MWH").innerHTML = "";
+
+            if (selectedValue) {
+                if (document.getElementById("date_input").value != "") {
+                    getSolarInfo();
+
+                } else{ alert("날짜를 입력해주세요."); }
+            } else { alert("지역을 선택해주세요."); }
+        }
+
+        function ChangeRegion() {
+            const selectBox = document.getElementById("select_box");
+
+            document.getElementById("title_location").innerText = selectBox.value;
+        }
+    </script>
+
+
+    <!--  여기부터 Footer입니다! -->
+    <div id="bottom">
+        <img src="./image/logo_dark.png" alt="" id="bottom_logo">
+        <p id="bottom_text">
+            데이터 출처: <a href="https://www.data.go.kr/data/15103243/openapi.do" target="_blank">공공데이터포털_한국전력거래소</a><br>
+            개발자: 부천대학교 컴퓨터소프트웨어학과 2433013 홍재현 _ 2학년 웹클라이언트 프로그래밍<br>
+            varsion: 1.0.0
+        </p>
+    </div>
+     <!--  여기까지 Footer입니다! -->
+    
+</body>
+</html>

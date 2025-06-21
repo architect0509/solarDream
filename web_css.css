@@ -1,0 +1,215 @@
+@font-face {
+    font-family: 'kakao';
+    src: url(./KakaoBigSans-Bold.ttf) format('truetype');
+}
+
+#header_logo {        
+    display: block;
+    width: 300px; height: 80%;
+    background-image: url(./image/logo.png);
+    background-size: 80%;
+    background-position: center;
+    margin: auto;
+    background-repeat: no-repeat;
+    transform: translate(0,8px);
+}
+
+#header {
+    background-color: rgb(255, 255, 255);
+    width: 100%; height: 120px;
+    align-items: center;
+}
+#sub_header {
+    width: 100%; height: 40px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 50px;
+}
+
+#bottom{
+    margin-top: 200px;;
+    width: 100%; height: 150px;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#bottom_logo{
+    width: 150px; 
+    border-radius: 10px ; 
+    background-color: white;
+}
+#bottom_text{
+    color: rgb(212, 212, 212);
+    margin: 10px 50px 10px 50px;
+    font-size: 14px;
+
+}
+
+a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.a_text{
+    padding-left: 30px; padding-right: 30px;
+    border-radius: 8px;
+    padding-right: 30px;
+
+    margin-right: 20px;
+    margin-left: 20px;
+
+}
+
+.a_text:hover{
+    color: rgb(25, 23, 46);
+    background-color: white;
+}
+
+#introduce_img{
+    margin: auto; margin-top: 30px;
+    /*max-width: 800px; min-width: 800px;*/
+    width: 50vw;
+}
+#introduce_img_right{
+    margin: 50px 50px 30px 50px;
+    width: 40vw;
+    opacity: 0.8;
+    margin-right: 20%;
+
+}
+
+#introduce_img_left{
+    margin: 50px 50px 30px 50px;
+    width: 40vw;
+    opacity: 0.8;
+    margin-left: 20%;
+}
+
+hr{
+    width: 50%; height: 1px; 
+    background-color: #639171; 
+    margin-top: 40px; margin-bottom: 40px;
+    margin-bottom: 0;
+}
+
+#infoBox{
+    width: 80%; height: 180px; min-width: 800px;
+    border-radius: 50px;
+    margin: 50px 10% 50px 10%;
+    padding: 30px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+#selected{
+    color: rgb(255, 255, 255);
+    background-color: rgba(164, 180, 233, 0.427);
+}
+
+.intro_infoText{
+    /* display: flex;
+    justify-content: center;*/
+    align-items: center; 
+    text-align: center;
+}
+
+#select_box{
+    border-radius: 20px;
+    width: 140px;
+    text-align: center;
+    display: flex;
+    justify-content: right;
+    margin-left: 50px;
+}
+
+#date_input{
+    border-radius: 20px;
+    width: 140px;
+    text-align: center;
+    display: flex;
+    justify-content: right;
+    margin-left: 20px;
+}
+
+#setting_info{  /*박스*/
+    display: flex;
+    justify-content: left;
+    background-color: rgb(148, 152, 197);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+
+    padding: 8px 30px 8px 0;    margin: 40px 50px 0 50px;
+    border-radius: 20px;
+}
+
+#setting_confirm{
+    width: 60px;
+    display: flex;
+    justify-content: right;
+    color: rgb(255, 255, 255);
+    background-color: rgb(50, 62, 94);
+
+    margin-left: 20px;    padding-right: 15px;
+    border-radius: 20px;    border: 0;
+}
+
+#setting_fast_input{
+    width: 100px;
+    display: flex;
+    justify-content: right;
+    color: rgb(255, 255, 255);
+    background-color: rgb(58, 78, 131);
+
+    margin-left: 10px;    padding-right: 20px;
+    border-radius: 20px;    border: 0;
+}
+
+#amgo_text{
+    color: rgb(60, 46, 113);
+    font-size: 50px;
+    font-weight: 700;
+}
+
+#resultIn_1{
+    margin: 50px;
+    color: rgb(120, 120, 125);
+}
+
+#Felling_contents{
+    width: 800px;
+    height: 80px;
+    background-color: white;
+    box-shadow: 0 0px 20px rgba(54, 11, 245, 0.5);
+    border-radius: 50px;
+    padding-top: 10px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+#Felling_contents:hover{
+    background-color: rgb(226, 228, 241);
+}
+
+#character_img{
+    width: 30%; 
+    margin-top: 70px; 
+    border-radius: 30px; 
+    max-width: 300px;
+}
+
+#setting_confirm:hover{ background-color: rgb(87, 99, 134); }
+#setting_fast_input:hover{ background-color: rgb(87, 99, 134); }
+
+.bold_f{ font-weight: 700; }
+.blue_f{ color: rgb(61, 61, 148);}
+.highlight_f{ background-color: yellow; }
+.big_f{ font-size: 40px; }
+.mid_f{ font-size: 25px; }

@@ -1,0 +1,88 @@
+{
+  "response": {
+    "header": {
+      "resultCode": "00",
+      "resultMsg": "OK"
+    },
+    "body": {
+      "dataType": "JSON",
+      "totalCount": "408",
+      "numOfRows": "10",
+      "pageNo": "1",
+      "items": {
+        "item": [
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "강원도",
+            "amgo": 2.480058,
+            "rn": 1
+          },
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "경기도",
+            "amgo": 1.680621,
+            "rn": 2
+          },
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "경상남도",
+            "amgo": 0.4114,
+            "rn": 3
+          },
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "경상북도",
+            "amgo": 5.48855,
+            "rn": 4
+          },
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "광주시",
+            "amgo": 0,
+            "rn": 5
+          },
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "대구시",
+            "amgo": 0,
+            "rn": 6
+          },
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "대전시",
+            "amgo": 0,
+            "rn": 7
+          },
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "부산시",
+            "amgo": 0,
+            "rn": 8
+          },
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "서울시",
+            "amgo": 0,
+            "rn": 9
+          },
+          {
+            "tradeNo": "1",
+            "tradeYmd": "20230527",
+            "regionNm": "세종시",
+            "amgo": 0,
+            "rn": 10
+          }
+        ]
+      }
+    }
+  }
+}
